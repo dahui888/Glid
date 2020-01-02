@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 public abstract class BaseActivity<p extends BasePresenter> extends AppCompatActivity {
+    //注意权限
     protected p presenter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
