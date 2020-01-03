@@ -14,12 +14,16 @@ public class SearchModleImpl  implements ISearchContract.SearchModle {
         netUtil.doGet(path, new NetUtil.MyCallBack() {
             @Override
             public void getJsonGet(String json) {
-                myCallBack.onSuccess(json);
+                if (myCallBack != null) {
+                    myCallBack.onSuccess(json);
+                }
             }
 
             @Override
             public void getJsonError(String msg) {
-                myCallBack.onFailure(msg);
+                if (myCallBack != null) {
+                    myCallBack.onFailure(msg);
+                }
             }
         });
 

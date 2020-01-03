@@ -49,13 +49,19 @@ public class NetUtil {
         StringRequest get = new StringRequest(path, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                myCallBack.getJsonGet(response);
+                if (myCallBack != null) {
+                    myCallBack.getJsonGet(response);
+                }
+
                 Log.d(TAG, "onResponse: "+response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                myCallBack.getJsonError(error.getMessage());
+                if (myCallBack != null) {
+                    myCallBack.getJsonError(error.getMessage());
+                }
+
                 Log.d(TAG, "onErrorResponse: "+error.getMessage());
             }
         });
