@@ -11,7 +11,6 @@ public class SearchPresenterimpl extends BasePresenter<ISearchContract.SearchVie
 
     @Override
     public void initModle() {
-
         searchModle = new SearchModleImpl();
     }
 
@@ -20,15 +19,24 @@ public class SearchPresenterimpl extends BasePresenter<ISearchContract.SearchVie
         searchModle.getData(path, new ISearchContract.SearchModle.MyCallBack() {
             @Override
             public void onSuccess(String json) {
-                iBaseView.onSuccess(json);
-
+                if (iBaseView != null) {
+                    iBaseView.onSuccess(json);
+                }
             }
 
             @Override
             public void onFailure(String msg) {
-                iBaseView.onFailure(msg);
-
+                if (iBaseView != null) {
+                    iBaseView.onFailure(msg);
+                }
             }
         });
+    }
+
+    //释放View接口 否则会造成activity内存泄漏
+    public void onDestory(){
+        if (iBaseView != null) {
+            iBaseView=null;
+        }
     }
 }
